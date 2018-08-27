@@ -18,7 +18,7 @@ class Time extends Component {
 
   // setting up interval for live time display
   componentDidMount() {
-    this.interval;
+    return this.interval;
   }
 
   //clear the interval before unmounting
