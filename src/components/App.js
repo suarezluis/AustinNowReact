@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import Date from "./Date";
+import Time from "./Time";
+
 class App extends Component {
   render() {
     const sidePanelWidth = 1;
@@ -31,8 +34,12 @@ class App extends Component {
 
           <div id="centerPanel" className={`col s${centerPanelWidth}`}>
             <div id="c1">c1</div>
-            <div id="c2">c2</div>
-            <div id="c3">c3</div>
+            <div id="c2">
+              <Date />
+            </div>
+            <div id="c3">
+              <Time />
+            </div>
           </div>
 
           <div id="rightPanel" className={`col s${sidePanelWidth}`}>
