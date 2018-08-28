@@ -1,9 +1,29 @@
 import React, { Component } from "react";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
+library.add(faStroopwafel)
+
+import { getTime, getFullDate } from "../timeHelpers";
 import Date from "./Date";
 import Time from "./Time";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: getFullDate(),
+      timeFormat: 12,
+      time: getTime(12)
+    };
+  }
+  interval = setInterval(() => {
+    this.setState({
+      time: getTime(this.state.timeFormat),
+      date: getFullDate()
+    });
+  }, 1000);
   render() {
     const sidePanelWidth = 1;
     const centerPanelWidth = 10;
@@ -35,10 +55,10 @@ class App extends Component {
           <div id="centerPanel" className={`col s${centerPanelWidth}`}>
             <div id="c1">c1</div>
             <div id="c2">
-              <Date />
+              <Date date={this.state.date} />
             </div>
             <div id="c3">
-              <Time />
+              <Time time={this.state.time} />
             </div>
           </div>
 
@@ -68,6 +88,13 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {}
+
+  //clear the interval before unmounting
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 }
 
